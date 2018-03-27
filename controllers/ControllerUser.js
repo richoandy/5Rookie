@@ -13,6 +13,23 @@ class ControllerUser {
     return model.User.findById(id);
   }
 
+  static addFavoriteHero(user, hero) {
+    let herofavorite = model.HeroFavorite.build({
+      UserId: user.id,
+      HeroId: hero.id
+    })
+    return herofavorite.save();
+  }
+
+  static inviteTeamMember(inviter, invitee, team) {
+    let invitation = model.Invitation.build({
+      inviter_id: inviter.id,
+      invitee_id: invitee.id,
+      teamId: team.id
+    })
+    return invitation.save();
+  }
+
   static add(obj) {
     let user = model.User.build({
       nickname: obj.nickname,
