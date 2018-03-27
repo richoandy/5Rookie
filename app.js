@@ -14,4 +14,14 @@ app.use('/', routeIndex)
 var routeUser = require('./routes/user.js')
 app.use('/home', routeUser)
 
+//test views
+
+app.get('/createnewteam', function(req, res){
+  res.render('my_team')
+})
+
+app.get('/createnewteam', function(req, res){
+  res.render('my_team')
+})
+
 app.listen(3800, () => console.log('express running'))
