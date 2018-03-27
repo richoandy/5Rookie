@@ -20,7 +20,7 @@ app.get('/createnewteam', function(req, res){
   res.render('my_team')
 })
 
-app.get('/createnewteam', function(req, res){
+app.get('/myteam', function(req, res){
   res.render('my_team')
 })
 

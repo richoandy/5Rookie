@@ -1,0 +1,15 @@
+<%- include("partials/_bs_header", {title: "Create New Team"}) %>
+<%- include("partials/_navbar") %>
+
+<div class="container">
+  <h1 class="text-light bg-dark"> <span class="badge badge-secondary mx-auto">Create new Team</span></h1>
+  <form action="" method="post">
+    <div class="form-group">
+      <label for="teamName">Your Team Name</label>
+      <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter team name" name="teamName">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<%- include("partials/_bs_footer") %>
