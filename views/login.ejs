@@ -1,7 +1,22 @@
-<%- include("./includes/_bs_header", {title: "login page"}) %>
+<%- include("partials/_bs_header", {title: "login page"}) %>
+
 
 <div class="container">
-  LOGIN PAGE
+  <h1 class="text-light bg-dark"> 5Rookie <span class="badge badge-secondary mx-auto">your Dota 2 Partner</span></h1>
+  <form action="" method="post">
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" placeholder="Password" name="password">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 </div>
 
-<%- include("./includes/_bs_footer") %>
+
+<%- include("partials/_bs_footer") %>
