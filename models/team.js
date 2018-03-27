@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
     Team.hasMany(models.UserTeam)
 
     Team.hasMany(models.Invitation)
+
+    Team.belongsTo(models.User, {
+      foreignKey: "id_ketua"
+    })
   };
   return Team;
 };

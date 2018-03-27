@@ -21,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
       through: models.UserTeam
     })
     User.hasMany(models.UserTeam)
+
+    User.hasMany(models.Team, {
+      foreignKey: "id_ketua"
+    })
   };
 
   User.getUserByPosition = function(position) {
