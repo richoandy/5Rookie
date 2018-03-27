@@ -6,6 +6,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Hero.associate = function(models) {
     // associations can be defined here
+    Hero.belongsToMany(models.User, {
+      through: models.HeroFavorite
+    })
+    Hero.hasMany(models.HeroFavorite)
   };
   return Hero;
 };

@@ -6,6 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   HeroFavorite.associate = function(models) {
     // associations can be defined here
+    HeroFavorite.belongsTo(models.User)
+    HeroFavorite.belongsTo(models.Hero)
   };
   return HeroFavorite;
 };
