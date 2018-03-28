@@ -3,6 +3,10 @@
 <%- include("partials/_navbar") %>
 
 <div class="container">
+ <a href="/user/create_team" class="btn btn-primary">create new team</a>
+</div>
+
+<div class="container">
   <table class = "table">
     <thead class = "thead-dark">
       <tr>
@@ -18,7 +22,7 @@
           <th> <%= user.UserTeams[i].Team.id %> </th>
           <th> <%= user.UserTeams[i].Team.nama %> </th>
           <th> <%= user.UserTeams[i].Team.id_ketua %> </th>
-          <th> <a href="/user/teams/<%= user.UserTeams[i].Team.id %>/detail">Detail</th>
+          <th> <a href="/user/teams/<%= user.UserTeams[i].Team.id %>/detail">Detail</a> | <a href="/user/teams/delete/<%= user.UserTeams[i].Team.id%>">delete</a></th>
         </tr>
       <% } %>
     </tbody>

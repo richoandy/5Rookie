@@ -52,14 +52,14 @@ class ControllerTeam {
   }
 
   static delete(id) {
-    return model.Team.findById(id)
-    .then(function(team) {
-      return team.destroy()
-    })
-    .catch(err => {
-      console.log(err.message);
-    });
-  }
+   return model.Team.findById(id)
+   .then(function(team) {
+     return team.destroy()
+   })
+   .catch(err => {
+     console.log(err.message);
+   });
+ }
 }
 
 module.exports = ControllerTeam;
