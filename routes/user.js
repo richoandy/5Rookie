@@ -167,33 +167,57 @@ router.get('/teams/:id/detail', (req, res) =>
   })
 )
 
-  router.get('/request/:teamId/:userId', (req, res) =>
-    model.Invitation.build({
-      invitee_id: req.params.userId,
-      teamId: req.params.teamId,
-      status: "pending",
-      action: "request"
-    }).save()
-    .then(function(success){
+router.get('/request/:teamId/:userId', (req, res) =>
+  model.Invitation.build({
+    invitee_id: req.params.userId,
+    teamId: req.params.teamId,
+    status: "pending",
+    action: "request"
+  }).save()
+  .then(function(success){
+    res.redirect('/user/home')
+  })
+)
+
+router.get('/invite/:teamId/:userId', (req, res) =>
+  model.Invitation.build({
+    invitee_id: req.params.userId,
+    teamId: req.params.teamId,
+    status: "pending",
+    action: "invite"
+  }).save()
+  .then(function(success){
+    res.redirect('/user/teams')
+  })
+)
+
+router.get('/invite/reject/:id', (req, res) =>
+  model.Invitation.findById(req.params.id)
+  .then((invitation) => {
+    invitation.update({
+      status: "reject"
+    })
+    .then(() => {
       res.redirect('/user/home')
     })
-  )
+  })
+)
 
-  router.get('/invite/:teamId/:userId', (req, res) =>
-    model.Invitation.build({
-      invitee_id: req.params.userId,
-      teamId: req.params.teamId,
-      status: "pending",
-      action: "invite"
-    }).save()
-    .then(function(success){
-      res.redirect('/user/teams')
+router.get('/invite/accept/:id', (req, res) =>
+  model.Invitation.findById(req.params.id)
+  .then((invitation) => {
+    invitation.update({
+      status: "accepted"
     })
-  )
-
-
-
-
-
+    model.UserTeam.build({
+      TeamId: invitation.TeamId,
+      UserId: invitation.invitee,
+      position: req.session.user.position
+    }).save()
+    .then(() => {
+      res.redirect("/user/teams")
+    });
+  })
+)
 
 module.exports = router
