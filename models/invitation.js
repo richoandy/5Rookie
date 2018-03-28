@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   var Invitation = sequelize.define('Invitation', {
     inviter_id: DataTypes.INTEGER,
     invitee_id: DataTypes.INTEGER,
-    teamId: DataTypes.INTEGER,
+    TeamId: DataTypes.INTEGER,
     status: DataTypes.STRING,
     action: DataTypes.STRING,
   }, {});

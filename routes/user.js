@@ -19,9 +19,11 @@ router.get('/home', function(req, res) {
     {
       invitee_id: req.session.user.id,
       status: "pending",
-      action: "invite"
-    }
+      action: "invite",
+    },
+    include: [{model: model.Team}],
   }).then(function(notif){
+    res.send(notif)
     let position = req.session.user.position;
     let teamsTmp = [];
     cTeam.avaliableTeam()
