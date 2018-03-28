@@ -1,4 +1,7 @@
 'use strict';
+
+const models = ('./models')
+
 module.exports = (sequelize, DataTypes) => {
   var Team = sequelize.define('Team', {
     nama: DataTypes.STRING,
@@ -33,16 +36,6 @@ module.exports = (sequelize, DataTypes) => {
     //     })
     //   }
     // }
-    hooks: {
-      beforeSave: (user, option) => {
-        let userteam = model.UserTeam.build({
-          TeamId: user.id,
-          UserId: req.session.user.position,
-          position: req.session.user.position
-        })
-        userteam.save();
-      }
-    }
   });
   Team.associate = function(models) {
     // associations can be defined here
