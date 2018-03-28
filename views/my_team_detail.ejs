@@ -3,6 +3,15 @@
 <%- include("partials/_navbar") %>
 
 <div class="container">
+  <h1>your team member</h1>
+  <ul>
+    <%for(let i = 0; i<teamMembers.length; i++){%>
+    <li><%=teamMembers[i].User.nickname%> : <%=teamMembers[i].User.position%> </li>
+    <%}%>
+  </ul>
+</div>
+
+<div class="container">
   <div class="alert alert-primary w-50" role="alert">
     <div class="">
       Notail wants to play for your team as position 1
@@ -22,36 +31,83 @@
     <thead class = "thead-dark">
       <tr>
         <th scope="col">Position 1</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%for(let i = 0; i< pos1.length; i++){%>
+      <tr>
+        <td><%=pos1[i].nickname%></td>
+        <td><a href="#" class = "btn btn-primary">invite</a></td>
+        <a href="/"></a>
+      </tr>
+      <%}%>
+    </tbody>
+  </table>
+
+  <table class = "table">
+    <thead class = "thead-dark">
+      <tr>
         <th scope="col">Position 2</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%for(let i = 0; i< pos2.length; i++){%>
+      <tr>
+        <td><%=pos2[i].nickname%></td>
+        <td><a href="#" class = "btn btn-primary">invite</a></td>
+      </tr>
+      <%}%>
+    </tbody>
+  </table>
+
+  <table class = "table">
+    <thead class = "thead-dark">
+      <tr>
         <th scope="col">Position 3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%for(let i = 0; i< pos3.length; i++){%>
+      <tr>
+        <td><%=pos3[i].nickname%></td>
+        <td><a href="#" class = "btn btn-primary">invite</a></td>
+      </tr>
+      <%}%>
+    </tbody>
+  </table>
+
+  <table class = "table">
+    <thead class = "thead-dark">
+      <tr>
         <th scope="col">Position 4</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%for(let i = 0; i< pos4.length; i++){%>
+      <tr>
+        <td><%=pos4[i].nickname%></td>
+        <td><a href="#" class = "btn btn-primary">invite</a></td>
+      </tr>
+      <%}%>
+    </tbody>
+  </table>
+
+  <table class = "table">
+    <thead class = "thead-dark">
+      <tr>
         <th scope="col">Position 5</th>
       </tr>
     </thead>
     <tbody>
+      <%for(let i = 0; i< pos5.length; i++){%>
       <tr>
-        <td>Fear <button type="button" class="btn">Invite</button></td>
-        <td>Dendi <button type="button" class="btn">Invite</button></td>
-        <td>iceiceice <button type="button" class="btn">Invite</button></td>
-        <td>jeraX <button type="button" class="btn">Invite</button></td>
-        <td>Fly <button type="button" class="btn">Invite</button></td>
+        <td><%=pos5[i].nickname%></td>
+        <td><a href="#" class = "btn btn-primary">invite</a></td>
       </tr>
-      <tr>
-        <td>Fear</td>
-        <td>Dendi</td>
-        <td>iceiceice</td>
-        <td>jeraX</td>
-        <td>Fly</td>
-      </tr>
-      <tr>
-        <td>Fear</td>
-        <td>Dendi</td>
-        <td>iceiceice</td>
-        <td>jeraX</td>
-        <td>Fly</td>
-      </tr>
+      <%}%>
     </tbody>
   </table>
+
 </div>
 
 
