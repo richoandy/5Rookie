@@ -5,13 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     invitee_id: DataTypes.INTEGER,
     teamId: DataTypes.INTEGER,
     status: DataTypes.STRING
-  }, {
-    hooks: {
-      beforeCreate: (user, option) => {
-        user.status = "Pending"
-      }
-    }
-  });
+  }, {});
   Invitation.associate = function(models) {
     // associations can be defined here
     Invitation.belongsTo(models.User, {
