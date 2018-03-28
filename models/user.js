@@ -1,5 +1,8 @@
 'use strict';
+
+
 module.exports = (sequelize, DataTypes) => {
+  const bcrypt = require('bcrypt');
   var User = sequelize.define('User', {
     nickname: DataTypes.STRING,
     password: DataTypes.STRING,
@@ -9,7 +12,27 @@ module.exports = (sequelize, DataTypes) => {
     medal: DataTypes.STRING,
     star: DataTypes.INTEGER,
     link_steam: DataTypes.STRING
-  }, {});
+  }, {
+    hooks: {
+      beforeSave: (user, option) => {
+        let password = user.password;
+        let hash = bcrypt.hashSync(password, 10);
+        console.log("hash--------", hash);
+        user.password = hash;
+        //cara compare
+        // if(bcrypt.compareSync('somePassword', hash)) {
+        //  // Passwords match
+        // } else {
+        //  // Passwords don't match
+        // }
+      },
+      beforeUpdate: (user, option) => {
+        let password = user.password;
+        let hash = bcrypt.hashSync(password, 10);
+        user.password = hash;
+      }
+    }
+  });
   User.associate = function(models) {
     // associations can be defined here
     User.belongsToMany(models.Hero, {

@@ -36,7 +36,7 @@ class ControllerUser {
       password: obj.password,
       salt: obj.salt,
       email: obj.email,
-      posisi: obj.posisi,
+      position: obj.position,
       medal: obj.medal,
       star: obj.star,
       link_steam: obj.link_steam
@@ -44,13 +44,13 @@ class ControllerUser {
     return user.save();
   }
 
-  static update(user, nickname, password, salt, email, posisi, medal, star, link_steam) {
+  static update(user, nickname, password, salt, email, position, medal, star, link_steam) {
     return user.update({
       nickname: nickname,
       password: password,
       salt: salt,
       email: email,
-      posisi: posisi,
+      position: position,
       medal: medal,
       star: star,
       link_steam: link_steam
