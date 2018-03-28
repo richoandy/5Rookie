@@ -1,0 +1,55 @@
+<%- include("partials/_bs_header", {title: "homepage"}) %>
+
+<%- include("partials/_navbar", {nickname: nickname}) %>
+
+  <div class="container">
+    <h2>edit profile</h2>
+
+    <form action="/user/profile/edit" method="post">
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" name="email" value="<%=user.email%>">
+      </div>
+
+      <div class="form-group">
+        <label for="nickname">Nickname</label>
+        <input type="text" class="form-control" placeholder="Nickname" name="nickname" value="<%=user.nickname%>">
+      </div>
+
+      <div class="form-group">
+        <label for="Medal">Medal</label>
+        <select class="form-control" name="medal">
+          <%for(let i = 0; i<medal.length; i++){%>
+            <%if(user.medal === medal[i]){%>
+            <option selected="selected"><%=medal[i]%>
+            <%}else{%>
+              <option><%=medal[i]%>
+            <%}%>
+          <%}%>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="Star">Star</label>
+        <select class="form-control" name="star">
+          <%for(let i = 0; i<star.length; i++){%>
+            <%if(user.star === star[i]){%>
+            <option selected="selected"><%=star[i]%>
+            <%}else{%>
+              <option><%=star[i]%>
+            <%}%>
+          <%}%>
+      </select>
+      </div>
+
+      <div class="form-group">
+        <label for="steam">Steam Profile URL</label>
+        <input type="text" class="form-control" placeholder="your steam profile URL" name="link_steam" value ="<%=user.link_steam%>">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+
+<%- include("partials/_bs_footer") %>

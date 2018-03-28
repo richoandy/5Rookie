@@ -1,0 +1,48 @@
+<%- include("partials/_bs_header", {title: "homepage"}) %>
+
+<%- include("partials/_navbar", {nickname: nickname}) %>
+
+
+  <div class="container">
+
+    <div class="">
+      <h1>My profile</h1>
+      <a href="/user/profile/edit">edit my profile</a>
+    </div>
+
+    <form action="/register" method="post">
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" name="email" value="<%=user.email%>" disabled>
+      </div>
+
+      <div class="form-group">
+        <label for="nickname">Nickname</label>
+        <input type="text" class="form-control" placeholder="Nickname" name="nickname" value="<%=user.nickname%>" disabled>
+      </div>
+
+      <div class="form-group">
+        <label for="Position">Position</label>
+        <input type="text" class="form-control" placeholder="Nickname" name="nickname" value="<%=user.position%>" disabled>
+      </div>
+
+      <div class="form-group">
+        <label for="Medal">Medal</label>
+        <input type="text" class="form-control" placeholder="" name="" value="<%=user.medal%>" disabled>
+      </div>
+
+      <div class="form-group">
+        <label for="Star">Star</label>
+        <input type="text" class="form-control" placeholder="" name="" value="<%=user.star%>" disabled>
+      </div>
+
+      <div class="form-group">
+        <label for="steam">Steam Profile URL</label>
+        <input type="text" class="form-control" placeholder="your steam profile URL" name="link_steam" value="<%=user.link_steam%>" disabled>
+      </div>
+    </form>
+
+  </div>
+
+
+<%- include("partials/_bs_footer") %>

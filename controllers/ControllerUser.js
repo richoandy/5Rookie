@@ -57,16 +57,10 @@ class ControllerUser {
     return user.save();
   }
 
-  static update(user, nickname, password, salt, email, position, medal, star, link_steam) {
-    return user.update({
-      nickname: nickname,
-      password: password,
-      salt: salt,
-      email: email,
-      position: position,
-      medal: medal,
-      star: star,
-      link_steam: link_steam
+  static update(updateObj, id) {
+    return model.User.findById(id)
+    .then(function(user){
+      return user.update(updateObj)
     })
   }
 
