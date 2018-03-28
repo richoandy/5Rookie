@@ -5,7 +5,7 @@ const cUser = require('../controllers/ControllerUser.js');
 const model = require('../models');
 const cTeam = require('../controllers/ControllerTeam.js');
 
-router.get('/home', function(req, res, next){
+router.get('/', function(req, res, next){
   if (req.session.user) {
     next()
   }else{
@@ -13,9 +13,26 @@ router.get('/home', function(req, res, next){
   }
 })
 
-router.get('/home', (req, res) =>
-    res.render('home.ejs', {nickname: req.session.user.nickname})
-)
+router.get('/home', function(req, res) {
+  let position = req.session.user.position;
+  let teamsTmp = [];
+  cTeam.avaliableTeam()
+  .then(teams => {
+    teams.forEach(team => {
+      let isFind = false;
+      team.UserTeams.forEach(userteam => {
+        if(userteam.position.includes(position)) {
+          console.log("----");
+          isFind = true;
+        }
+      })
+      if(!isFind) {
+        teamsTmp.push(team);
+      }
+    })
+    res.render('home.ejs', {nickname: req.session.user.nickname, teams: teamsTmp})
+  })
+})
 
 router.get('/profile', (req, res) =>
   res.render("profile_page", {nickname: req.session.user.nickname, user: req.session.user})

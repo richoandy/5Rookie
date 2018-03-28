@@ -1,4 +1,6 @@
 const model = require('../models');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 class ControllerTeam {
   static list() {
@@ -9,16 +11,11 @@ class ControllerTeam {
     });
   }
 
-  static avaliableTeam(userPosition) {
+  static avaliableTeam() {
     return model.Team.findAll({
       include: [
         {
-          model: model.UserTeam,
-          where: {
-            position: {
-              [Op.notIn]: [userPosition],
-            }
-          }
+          model: model.UserTeam
         }
       ]
     })
