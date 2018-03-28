@@ -33,6 +33,16 @@ module.exports = (sequelize, DataTypes) => {
     //     })
     //   }
     // }
+    hooks: {
+      beforeSave: (user, option) => {
+        let userteam = model.UserTeam.build({
+          TeamId: user.id,
+          UserId: req.session.user.position,
+          position: req.session.user.position
+        })
+        userteam.save();
+      }
+    }
   });
   Team.associate = function(models) {
     // associations can be defined here
@@ -45,7 +55,8 @@ module.exports = (sequelize, DataTypes) => {
     Team.hasMany(models.Invitation)
 
     Team.belongsTo(models.User, {
-      foreignKey: "id_ketua"
+      foreignKey: "id_ketua",
+      as: 'ketua'
     })
   };
   return Team;
