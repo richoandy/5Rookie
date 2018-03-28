@@ -19,7 +19,7 @@ app.use('/', routeIndex)
 
 //user
 var routeUser = require('./routes/user.js')
-app.use('/home', routeUser)
+app.use('/user', routeUser)
 
 //test views
 
