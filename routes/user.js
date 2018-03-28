@@ -18,15 +18,15 @@ router.get('/home', (req, res) =>
 )
 
 router.get('/profile', (req, res) =>
-  res.send("profile page")
+  res.send("profile page", {nickname: req.session.user.nickname})
 )
 
 router.get('/user/my_team',(req, res) =>
-    res.send("my team page")
+    res.send("my team page", {nickname: req.session.user.nickname})
 )
 
 router.get('/create_team', (req, res) =>
-  res.render('create_team')
+  res.render('create_team', {nickname: req.session.user.nickname})
 )
 
 router.post('/create_team', function(req, res){
@@ -44,7 +44,7 @@ router.post('/create_team', function(req, res){
 router.get('/teams', (req, res) =>
   model.User.findOne({
     where: {
-      id: 7
+      id: req.session.user.id
     },
     include: [
       {
@@ -53,7 +53,7 @@ router.get('/teams', (req, res) =>
     ]
   })
   .then(user => {
-    res.render('my_team', {user});
+    res.render('my_team', {user, nickname: req.session.user.nickname});
   })
 )
 
