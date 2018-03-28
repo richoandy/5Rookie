@@ -28,7 +28,12 @@
       </tr>
     </thead>
     <tbody>
-      
+      <% for(let i = 0; i < teams.length; i++) { %>
+        <tr>
+          <th> <%= teams[i].nama %> </th>
+          <th> <a href="/request/team/<%= teams[i].id %>" class="btn btn-primary" role="button">Request to Join</a> </th>
+        </tr>
+      <% } %>
     </tbody>
   </table>
 </div>
