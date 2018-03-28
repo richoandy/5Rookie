@@ -172,7 +172,7 @@ model.Invitation.findAll({
           pos5.push(user[i])
         }
       }
-      res.render('my_team_detail', {teamMembers:teamData, nickname: req.session.user.nickname, pos1:pos1, pos2:pos2, pos3:pos3, pos4:pos4, pos5:pos5, teamId: req.params.id, notif:notif})
+      res.render('my_team_detail', {teamMembers:teamData, nickname: req.session.user.nickname, pos1:pos1, pos2:pos2, pos3:pos3, pos4:pos4, pos5:pos5, teamId: req.params.id})
     })
   })
 })
@@ -204,7 +204,8 @@ router.get('/invite/:TeamId/:userId', (req, res) =>
   })
 )
 
-router.get('/respond/reject/:id', (req, res) =>
+
+router.get('/respon/reject/:id', (req, res) =>
   model.Invitation.findById(req.params.id)
   .then((invitation) => {
     invitation.update({
@@ -216,21 +217,23 @@ router.get('/respond/reject/:id', (req, res) =>
   })
 )
 
-router.get('/respond/accept/:id', (req, res) =>
+
+router.get('/respon/accept/:id', function(req, res) {
   model.Invitation.findById(req.params.id)
   .then((invitation) => {
     invitation.update({
       status: "accepted"
     })
-    model.UserTeam.build({
+    let userteam = model.UserTeam.build({
       TeamId: invitation.TeamId,
-      UserId: invitation.invitee,
+      UserId: req.session.user.id,
       position: req.session.user.position
-    }).save()
+    })
+    userteam.save()
     .then(() => {
       res.redirect("/user/teams")
     });
   })
-)
+})
 
 module.exports = router
