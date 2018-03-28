@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     link_steam: DataTypes.STRING
   }, {
     hooks: {
-      beforeSave: (user, option) => {
+      beforeCreate: (user, option) => {
         let password = user.password;
         let hash = bcrypt.hashSync(password, 10);
         console.log("hash--------", hash);
@@ -25,11 +25,6 @@ module.exports = (sequelize, DataTypes) => {
         // } else {
         //  // Passwords don't match
         // }
-      },
-      beforeUpdate: (user, option) => {
-        let password = user.password;
-        let hash = bcrypt.hashSync(password, 10);
-        user.password = hash;
       }
     }
   });

@@ -18,11 +18,33 @@ router.get('/home', (req, res) =>
 )
 
 router.get('/profile', (req, res) =>
-  res.send("profile page", {nickname: req.session.user.nickname})
+  res.render("profile_page", {nickname: req.session.user.nickname, user: req.session.user})
 )
 
-router.get('/user/my_team',(req, res) =>
-    res.send("my team page", {nickname: req.session.user.nickname})
+router.get('/profile/edit', (req, res) =>
+  res.render('profile_edit', {
+    nickname: req.session.user.nickname,
+    user: req.session.user,
+    position:["Position 1", "Position 2", "Position 3", "Position 4","Position 5"],
+    medal:["Herald", "Guardian", "Crusader", "Archon", "Legend", "Ancient", "Divine",],
+    star:[0, 1, 2, 3, 4, 5, 6,]
+  })
+)
+
+router.post('/profile/edit', (req, res) =>
+  cUser.update({
+    email: req.body.email,
+    nickname: req.body.nickname,
+    position: req.body.position,
+    medal: req.body.medal,
+    star: req.body.star,
+    link_steam: req.body.link_steam
+  }, req.session.user.id)
+  .then(function(success){
+    req.session.user = success
+    res.redirect('/user/home')
+  })
+
 )
 
 router.get('/create_team', (req, res) =>
@@ -52,6 +74,7 @@ router.get('/teams', (req, res) =>
       }
     ]
   })
+
   .then(user => {
     res.render('my_team', {user, nickname: req.session.user.nickname});
   })
