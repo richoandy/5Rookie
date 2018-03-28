@@ -130,54 +130,56 @@ router.get('/teams', (req, res) =>
 )
 
 router.get('/teams/:id/detail', (req, res) =>
+  model.Invitation.findAll({
+      where:
+      {
+        TeamId: req.params.id,
+        status: "pending",
+        action: "request",
+      },
+      include: [
+        {
+          model: model.User
+        }
+      ]
+    })
+  .then(function(notif){
+    console.log("notif----", notif);
+    model.UserTeam.findAll({
+      where: {TeamId: req.params.id},
+      include: [{model: model.User}],
+      order:[['position', 'ASC']]
+    })
+    .then(function(teamData){
+      model.User.findAll()
+      .then(function(user){
+        let pos1 = []
+        let pos2 = []
+        let pos3 = []
+        let pos4 = []
+        let pos5 = []
 
-model.Invitation.findAll({
-  where:
-  {
-    invitee_id: req.session.user.id,
-    status: "pending",
-    action: "request",
-  },
-  // include: [{model: model.User}],
-  })
-.then(function(notif){
-  model.UserTeam.findAll({
-    where: {TeamId: req.params.id},
-    include: [{model: model.User}],
-    order:[['position', 'ASC']]
-  })
-  .then(function(teamData){
-    model.User.findAll()
-    .then(function(user){
-      let pos1 = []
-      let pos2 = []
-      let pos3 = []
-      let pos4 = []
-      let pos5 = []
-
-      for (var i = 0; i < user.length; i++) {
-        if (user[i].position === "Position 1") {
-          pos1.push(user[i])
+        for (var i = 0; i < user.length; i++) {
+          if (user[i].position === "Position 1") {
+            pos1.push(user[i])
+          }
+          if (user[i].position === "Position 2") {
+            pos2.push(user[i])
+          }
+          if (user[i].position === "Position 3") {
+            pos3.push(user[i])
+          }
+          if (user[i].position === "Position 4") {
+            pos4.push(user[i])
+          }
+          if (user[i].position === "Position 5") {
+            pos5.push(user[i])
+          }
         }
-        if (user[i].position === "Position 2") {
-          pos2.push(user[i])
-        }
-        if (user[i].position === "Position 3") {
-          pos3.push(user[i])
-        }
-        if (user[i].position === "Position 4") {
-          pos4.push(user[i])
-        }
-        if (user[i].position === "Position 5") {
-          pos5.push(user[i])
-        }
-      }
-      res.render('my_team_detail', {teamMembers:teamData, nickname: req.session.user.nickname, pos1:pos1, pos2:pos2, pos3:pos3, pos4:pos4, pos5:pos5, teamId: req.params.id})
+        res.render('my_team_detail', {teamMembers:teamData, nickname: req.session.user.nickname, pos1:pos1, pos2:pos2, pos3:pos3, pos4:pos4, pos5:pos5, teamId: req.params.id, notif})
+      })
     })
   })
-})
-
-
 )
 
 router.get('/request/:teamId/:userId', (req, res) =>
@@ -233,6 +235,27 @@ router.get('/respon/accept/:id', function(req, res) {
     .then(() => {
       res.redirect("/user/teams")
     });
+  })
+})
+
+router.get('/respon/teamAccept/:id', function(req, res) {
+  model.Invitation.findById(req.params.id)
+  .then((invitation) => {
+    invitation.update({
+      status: "accepted"
+    })
+    model.User.findById(invitation.invitee_id)
+    .then((user) => {
+      let userteam = model.UserTeam.build({
+        TeamId: invitation.TeamId,
+        UserId: invitation.invitee_id,
+        position: user.position
+      })
+      userteam.save()
+      .then(() => {
+        res.redirect("/user/teams")
+      });
+    })
   })
 })
 
