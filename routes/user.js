@@ -56,10 +56,14 @@ router.post('/create_team', function(req, res){
     nama: req.body.teamName,
     id_ketua: req.session.user.id,
   }
-
   cTeam.add(teamProperties)
   .then(function(newTeam){
-    res.send(newTeam)
+    model.UserTeam.build({
+      TeamId: newTeam.id,
+      UserId: req.session.user.id,
+      position: req.session.user.position
+    }).save();
+    res.redirect("/user/teams")
   })
 })
 
@@ -82,6 +86,18 @@ router.get('/teams', (req, res) =>
 
   .then(user => {
     res.render('my_team', {user, nickname: req.session.user.nickname});
+  })
+)
+
+router.get('/teams/delete/:id', (req, res) =>
+  cTeam.delete(req.params.id)
+  .then(function(success){
+    userteam.delete({
+      where: {TeamId: req.params.id}
+    })
+    .then(function(success){
+      res.redirect('user/teams')
+    })
   })
 )
 
