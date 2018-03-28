@@ -1,15 +1,43 @@
-<%- include("partials/_bs_header", {title: "Create New Team"}) %>
+<%- include("partials/_bs_header", {title: "My Team"}) %>
+
 <%- include("partials/_navbar") %>
 
 <div class="container">
-  <h1 class="text-light bg-dark"> <span class="badge badge-secondary mx-auto">Create new Team</span></h1>
-  <form action="" method="post">
-    <div class="form-group">
-      <label for="teamName">Your Team Name</label>
-      <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter team name" name="teamName">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  <table class = "table">
+    <thead class = "thead-dark">
+      <tr>
+        <th scope="col">Position 1</th>
+        <th scope="col">Position 2</th>
+        <th scope="col">Position 3</th>
+        <th scope="col">Position 4</th>
+        <th scope="col">Position 5</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Fear <button type="button" class="btn">Invite</button></td>
+        <td>Dendi <button type="button" class="btn">Invite</button></td>
+        <td>iceiceice <button type="button" class="btn">Invite</button></td>
+        <td>jeraX <button type="button" class="btn">Invite</button></td>
+        <td>Fly <button type="button" class="btn">Invite</button></td>
+      </tr>
+      <tr>
+        <td>Fear</td>
+        <td>Dendi</td>
+        <td>iceiceice</td>
+        <td>jeraX</td>
+        <td>Fly</td>
+      </tr>
+      <tr>
+        <td>Fear</td>
+        <td>Dendi</td>
+        <td>iceiceice</td>
+        <td>jeraX</td>
+        <td>Fly</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
 
 <%- include("partials/_bs_footer") %>
