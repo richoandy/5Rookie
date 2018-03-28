@@ -3,6 +3,12 @@
 
 <div class="container">
   <h1 class="text-light bg-dark"> 5Rookie <span class="badge badge-secondary mx-auto">your Dota 2 Partner</span></h1>
+  <% if(err !== "none"){ %>
+    <div class="alert alert-danger" role="alert">
+      <%= err %>
+    </div>
+  <% } %>
+  <a href="/register">dont have account yet ? register here</a>
   <form action="/login" method="post">
     <div class="form-group">
       <label for="email">Email address</label>

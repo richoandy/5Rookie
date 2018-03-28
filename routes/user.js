@@ -130,6 +130,17 @@ router.get('/teams', (req, res) =>
 )
 
 router.get('/teams/:id/detail', (req, res) =>
+
+model.Invitation.findAll({
+  where:
+  {
+    invitee_id: req.session.user.id,
+    status: "pending",
+    action: "request",
+  },
+  // include: [{model: model.User}],
+  })
+.then(function(notif){
   model.UserTeam.findAll({
     where: {TeamId: req.params.id},
     include: [{model: model.User}],
@@ -164,6 +175,9 @@ router.get('/teams/:id/detail', (req, res) =>
       res.render('my_team_detail', {teamMembers:teamData, nickname: req.session.user.nickname, pos1:pos1, pos2:pos2, pos3:pos3, pos4:pos4, pos5:pos5, teamId: req.params.id})
     })
   })
+})
+
+
 )
 
 router.get('/request/:teamId/:userId', (req, res) =>
@@ -190,6 +204,7 @@ router.get('/invite/:TeamId/:userId', (req, res) =>
   })
 )
 
+
 router.get('/respon/reject/:id', (req, res) =>
   model.Invitation.findById(req.params.id)
   .then((invitation) => {
@@ -201,6 +216,7 @@ router.get('/respon/reject/:id', (req, res) =>
     })
   })
 )
+
 
 router.get('/respon/accept/:id', function(req, res) {
   model.Invitation.findById(req.params.id)

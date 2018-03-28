@@ -12,7 +12,7 @@ router.get('/', (req, res) =>
 )
 
 router.get('/login', (req, res) =>
-  res.render("login")
+  res.render("login", {err:"none"})
 )
 
 router.post('/login', function(req, res) {
@@ -25,7 +25,7 @@ router.post('/login', function(req, res) {
      req.session.user = user;
      res.redirect('/user/home');
     } else {
-     res.send('gagal');
+     res.render("login", {err:"wrong email/password"})
     }
   })
 })
