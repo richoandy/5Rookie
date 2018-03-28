@@ -11,18 +11,22 @@ router.get('/home', function(req, res, next){
 })
 
 router.get('/home', (req, res) =>
-  res.render('home.ejs')
+  res.render('home.ejs', {nickname: req.session.user.nickname})
 )
 
 router.get('/profile', (req, res) =>
   res.send("profile page")
 )
 
-router.get('/createTeam', (req, res) =>
+router.get('/user/my_team',(req, res) =>
+    res.send("my team page")
+)
+
+router.get('/create_team', (req, res) =>
   res.render('create_team')
 )
 
-router.post('/createTeam', function(req, res){
+router.post('/create_team', function(req, res){
   let teamProperties = {
     nama: req.body.teamName,
     id_ketua: req.session.user.id,
