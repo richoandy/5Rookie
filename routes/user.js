@@ -23,7 +23,6 @@ router.get('/home', function(req, res) {
     },
     include: [{model: model.Team}],
   }).then(function(notif){
-    res.send(notif)
     let position = req.session.user.position;
     let teamsTmp = [];
     cTeam.avaliableTeam()
@@ -162,7 +161,7 @@ router.get('/teams/:id/detail', (req, res) =>
           pos5.push(user[i])
         }
       }
-      res.render('my_team_detail', {teamMembers:teamData, nickname: req.session.user.nickname, pos1:pos1, pos2:pos2, pos3:pos3, pos4:pos4, pos5:pos5, teamId: req.params.id})
+      res.render('my100 rows_team_detail', {teamMembers:teamData, nickname: req.session.user.nickname, pos1:pos1, pos2:pos2, pos3:pos3, pos4:pos4, pos5:pos5, teamId: req.params.id})
     })
   })
 )
@@ -170,7 +169,7 @@ router.get('/teams/:id/detail', (req, res) =>
 router.get('/request/:teamId/:userId', (req, res) =>
   model.Invitation.build({
     invitee_id: req.params.userId,
-    teamId: req.params.teamId,
+    TeamId: req.params.teamId,
     status: "pending",
     action: "request"
   }).save()
@@ -179,10 +178,10 @@ router.get('/request/:teamId/:userId', (req, res) =>
   })
 )
 
-router.get('/invite/:teamId/:userId', (req, res) =>
+router.get('/invite/:TeamId/:userId', (req, res) =>
   model.Invitation.build({
     invitee_id: req.params.userId,
-    teamId: req.params.teamId,
+    TeamId: req.params.TeamId,
     status: "pending",
     action: "invite"
   }).save()
