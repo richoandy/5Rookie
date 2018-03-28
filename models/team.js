@@ -1,4 +1,7 @@
 'use strict';
+
+const models = ('./models')
+
 module.exports = (sequelize, DataTypes) => {
   var Team = sequelize.define('Team', {
     nama: DataTypes.STRING,

@@ -102,5 +102,17 @@ router.get('/teams', (req, res) =>
   })
 )
 
+router.get('/teams/delete/:id', (req, res) =>
+  cTeam.delete(req.params.id)
+  .then(function(success){
+    userteam.delete({
+      where: {TeamId: req.params.id}
+    })
+    .then(function(success){
+      res.redirect('user/teams')
+    })
+  })
+)
+
 
 module.exports = router
