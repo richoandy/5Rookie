@@ -14,7 +14,7 @@ router.get('/home', function(req, res, next){
 })
 
 router.get('/home', (req, res) =>
-  res.render('home.ejs', {nickname: req.session.user.nickname})
+    res.render('home.ejs', {nickname: req.session.user.nickname})
 )
 
 router.get('/profile', (req, res) =>

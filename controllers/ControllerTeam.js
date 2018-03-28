@@ -9,6 +9,21 @@ class ControllerTeam {
     });
   }
 
+  static avaliableTeam(userPosition) {
+    return model.Team.findAll({
+      include: [
+        {
+          model: model.UserTeam,
+          where: {
+            position: {
+              [Op.notIn]: [userPosition],
+            }
+          }
+        }
+      ]
+    })
+  }
+
   static findById(id) {
     return model.Team.findById(id);
   }
