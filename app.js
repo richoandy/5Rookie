@@ -18,7 +18,7 @@ app.use('/home', routeUser)
 
 
 app.get('/test', function(req, res){
-  res.render('home')
+  res.render('my_team')
 })
 
 app.listen(3800, () => console.log('express running'))
