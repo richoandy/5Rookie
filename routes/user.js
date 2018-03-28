@@ -46,9 +46,14 @@ router.get('/teams', (req, res) =>
     where: {
       id: req.session.user.id
     },
-    include: [
+    include : [
       {
         model: model.UserTeam,
+        include: [
+          {
+            model: model.Team
+          }
+        ]
       }
     ]
   })
