@@ -53,5 +53,15 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
+  User.searchBy = function(search) {
+    return User.findAll({
+      where: {
+        nickname: {
+          $iLike: `%${search}%`
+        }
+      }
+    })
+  }
+
   return User;
 };

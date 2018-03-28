@@ -1,0 +1,52 @@
+<%- include("partials/_bs_header", {title: "homepage"}) %>
+
+<%- include("partials/_navbar", {nickname: nickname}) %>
+
+<div class="container">
+  <h1 class="text-black">User</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Position</th>
+        <th>Medal</th>
+        <th>Star</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(let i = 0; i < users.length; i++) { %>
+        <tr>
+          <th> <%= users[i].nickname %> </th>
+          <th> <%= users[i].position %> </th>
+          <th> <%= users[i].medal %> </th>
+          <th> <h2><%= formatStar(users[i].star) %></h2> </th>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<br/> <br/>
+
+<div class="container">
+  <h1 class="text-black">Team</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Team Name</th>
+        <th>Captain</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(let i = 0; i < teams.length; i++) { %>
+        <tr>
+          <th> <%= teams[i].nama %> </th>
+          <th> <%= teams[i].id_ketua %> </th>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+
+<%- include("partials/_bs_footer") %>

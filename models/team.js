@@ -33,5 +33,15 @@ module.exports = (sequelize, DataTypes) => {
   //   })
   // }
 
+  Team.searchBy = function(search) {
+    return Team.findAll({
+      where: {
+        nama: {
+          $iLike: `%${search}%`
+        }
+      }
+    })
+  }
+
   return Team;
 };
