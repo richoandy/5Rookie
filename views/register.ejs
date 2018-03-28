@@ -2,7 +2,7 @@
 
 <div class="container">
   <h1 class="text-light bg-dark"> 5Rookie <span class="badge badge-secondary mx-auto">Register Here, Rookie !</span></h1>
-  <form action="" method="post">
+  <form action="/register" method="post">
     <div class="form-group">
       <label for="email">Email address</label>
       <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" name="email">
@@ -14,24 +14,24 @@
     </div>
 
     <div class="form-group">
-      <label for="Nickname">Nickname</label>
-      <input type="text" class="form-control" placeholder="Nickname" name="Nickname">
+      <label for="nickname">Nickname</label>
+      <input type="text" class="form-control" placeholder="Nickname" name="nickname">
     </div>
 
     <div class="form-group">
       <label for="Position">Position</label>
-      <select class="form-control">
-      <option>Position 1</option>
-      <option>Position 2</option>
-      <option>Position 3</option>
-      <option>Position 4</option>
-      <option>Position 5</option>
-    </select>
+      <select class="form-control" name="position">
+        <option>Position 1</option>
+        <option>Position 2</option>
+        <option>Position 3</option>
+        <option>Position 4</option>
+        <option>Position 5</option>
+      </select>
     </div>
 
     <div class="form-group">
       <label for="Medal">Medal</label>
-      <select class="form-control">
+      <select class="form-control" name="medal">
         <option>Herald</option>
         <option>Guardian</option>
         <option>Crusader</option>
@@ -44,7 +44,7 @@
 
     <div class="form-group">
       <label for="Star">Star</label>
-      <select class="form-control">
+      <select class="form-control" name="star">
         <option>0</option>
         <option>1</option>
         <option>2</option>
@@ -56,7 +56,7 @@
 
     <div class="form-group">
       <label for="steam">Steam Profile URL</label>
-      <input type="text" class="form-control" placeholder="your steam profile URL" name="Star">
+      <input type="text" class="form-control" placeholder="your steam profile URL" name="link_steam">
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
