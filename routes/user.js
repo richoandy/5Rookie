@@ -119,17 +119,46 @@ router.get('/teams', (req, res) =>
   })
 )
 
-router.get('/teams/delete/:id', (req, res) =>
-  cTeam.delete(req.params.id)
-  .then(function(success){
-    userteam.delete({
-      where: {TeamId: req.params.id}
-    })
-    .then(function(success){
-      res.redirect('user/teams')
+router.get('/teams/:id/detail', (req, res) =>
+  model.UserTeam.findAll({
+    where: {TeamId: req.params.id},
+    include: [{model: model.User}],
+    order:[['position', 'ASC']]
+  })
+  .then(function(teamData){
+    model.User.findAll()
+    .then(function(user){
+      let pos1 = []
+      let pos2 = []
+      let pos3 = []
+      let pos4 = []
+      let pos5 = []
+
+      for (var i = 0; i < user.length; i++) {
+        if (user[i].position === "Position 1") {
+          pos1.push(user[i])
+        }
+        if (user[i].position === "Position 2") {
+          pos2.push(user[i])
+        }
+        if (user[i].position === "Position 3") {
+          pos3.push(user[i])
+        }
+        if (user[i].position === "Position 4") {
+          pos4.push(user[i])
+        }
+        if (user[i].position === "Position 5") {
+          pos5.push(user[i])
+        }
+      }
+      res.render('my_team_detail', {teamMembers: teamData, nickname: req.session.user.nickname, pos1:pos1, pos2:pos2, pos3:pos3, pos4:pos4, pos5:pos5})
     })
   })
+
+
 )
+
+
 
 
 module.exports = router
