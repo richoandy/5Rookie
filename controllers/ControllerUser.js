@@ -9,6 +9,14 @@ class ControllerUser {
     });
   }
 
+  static findEmailLogin(email) {
+    return model.User.findOne({
+      where: {
+        email: email
+      }
+    })
+  }
+
   static findById(id) {
     return model.User.findById(id);
   }
