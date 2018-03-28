@@ -14,23 +14,32 @@ router.get('/', function(req, res, next){
 })
 
 router.get('/home', function(req, res) {
-  let position = req.session.user.position;
-  let teamsTmp = [];
-  cTeam.avaliableTeam()
-  .then(teams => {
-    teams.forEach(team => {
-      let isFind = false;
-      team.UserTeams.forEach(userteam => {
-        if(userteam.position.includes(position)) {
-          console.log("----");
-          isFind = true;
+  model.Invitation.findAll({
+    where:
+    {
+      invitee_id: req.session.user.id,
+      status: "pending",
+      action: "invite"
+    }
+  }).then(function(notif){
+    let position = req.session.user.position;
+    let teamsTmp = [];
+    cTeam.avaliableTeam()
+    .then(teams => {
+      teams.forEach(team => {
+        let isFind = false;
+        team.UserTeams.forEach(userteam => {
+          if(userteam.position.includes(position)) {
+            console.log("----");
+            isFind = true;
+          }
+        })
+        if(!isFind) {
+          teamsTmp.push(team);
         }
       })
-      if(!isFind) {
-        teamsTmp.push(team);
-      }
+      res.render('home.ejs', {nickname: req.session.user.nickname, teams: teamsTmp, user:req.session.user, notif:notif})
     })
-    res.render('home.ejs', {nickname: req.session.user.nickname, teams: teamsTmp})
   })
 })
 
@@ -151,12 +160,36 @@ router.get('/teams/:id/detail', (req, res) =>
           pos5.push(user[i])
         }
       }
-      res.render('my_team_detail', {teamMembers: teamData, nickname: req.session.user.nickname, pos1:pos1, pos2:pos2, pos3:pos3, pos4:pos4, pos5:pos5})
+      res.render('my_team_detail', {teamMembers:teamData, nickname: req.session.user.nickname, pos1:pos1, pos2:pos2, pos3:pos3, pos4:pos4, pos5:pos5, teamId: req.params.id})
     })
   })
-
-
 )
+
+  router.get('/request/:teamId/:userId', (req, res) =>
+    model.Invitation.build({
+      invitee_id: req.params.userId,
+      teamId: req.params.teamId,
+      status: "pending",
+      action: "request"
+    }).save()
+    .then(function(success){
+      res.redirect('/user/home')
+    })
+  )
+
+  router.get('/invite/:teamId/:userId', (req, res) =>
+    model.Invitation.build({
+      invitee_id: req.params.userId,
+      teamId: req.params.teamId,
+      status: "pending",
+      action: "invite"
+    }).save()
+    .then(function(success){
+      res.redirect('/user/teams')
+    })
+  )
+
+
 
 
 
