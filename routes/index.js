@@ -2,6 +2,10 @@ var express = require('express')
 var router = express.Router()
 const bcrypt = require('bcrypt');
 const cUser = require('../controllers/ControllerUser.js');
+const model = require('../models')
+
+const formatStar = require('../helpers/format_star_helper');
+
 
 router.get('/', (req, res) =>
   res.redirect('/register')
@@ -81,8 +85,17 @@ router.get('/logout', function(req, res, next) {
   }
 });
 
-
-
+router.post('/search', function(req, res) {
+  res.locals.formatStar = formatStar;
+  let search = req.body.search;
+  model.User.searchBy(search)
+  .then(users => {
+    model.Team.searchBy(search)
+    .then(teams => {
+      res.render('search', {users, teams, nickname: req.session.user.nickname})
+    })
+  })
+});
 
 
 module.exports = router

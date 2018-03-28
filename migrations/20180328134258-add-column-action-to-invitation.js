@@ -14,7 +14,7 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     /*
-      Add reverting commands here.
+      Add reverting commands Shere.
       Return a promise to correctly handle asynchronicity.
 
       Example:
