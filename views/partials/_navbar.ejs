@@ -8,19 +8,22 @@
     </form>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">Home </a>
+        <a class="nav-link" href="/user/home">Home </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">My Profile</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="/user/my_team">My Team</a>
+       </li>
+       <li class="nav-item">
         <a class="nav-link" href="/user/teams">My Team</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">[Login User]</a>
+        <small class="text-warning">Welcome, <%=nickname%></small>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Logout</a>
+        <a class="nav-link" href="/logout">Logout</a>
       </li>
     </ul>
   </div>

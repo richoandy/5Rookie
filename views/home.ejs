@@ -1,6 +1,6 @@
 <%- include("partials/_bs_header", {title: "homepage"}) %>
 
-<%- include("partials/_navbar") %>
+<%- include("partials/_navbar", {nickname: nickname}) %>
 
 <div class="container">
   <div class="alert alert-primary w-50" role="alert">
@@ -19,7 +19,7 @@
 </div>
 
 <div class="container">
-  <h1 class="text-white bg-dark w-50">availabe team</h1>
+  <h1 class="text-white bg-dark w-50">available team</h1>
   <table class="table">
     <thead>
       <tr>

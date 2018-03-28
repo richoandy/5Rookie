@@ -1,7 +1,11 @@
 <%- include("partials/_bs_header", {title: "register page"}) %>
 
 <div class="container">
+
   <h1 class="text-light bg-dark"> 5Rookie <span class="badge badge-secondary mx-auto">Register Here, Rookie !</span></h1>
+
+  <a href="/login" class="btn btn-warning">Already a user ? </a>
+
   <form action="/register" method="post">
     <div class="form-group">
       <label for="email">Email address</label>

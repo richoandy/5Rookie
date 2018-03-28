@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const cUser = require('../controllers/ControllerUser.js');
 
 router.get('/', (req, res) =>
-  res.send("INDEX 5 ROOKIE")
+  res.redirect('/register')
 )
 
 router.get('/login', (req, res) =>
@@ -19,7 +19,7 @@ router.post('/login', function(req, res) {
     if(bcrypt.compareSync(password, user.password)) {
      // Passwords match
      req.session.user = user;
-     res.render('/');
+     res.redirect('/user/home');
     } else {
      res.send('gagal');
     }
@@ -43,11 +43,46 @@ router.post('/register', function(req, res) {
   };
   cUser.add(attributeUser)
   .then(() => {
-    res.redirect('/');
+    res.redirect('/login');
   })
   .catch(err => {
     console.log(err.message);
   })
 });
+
+router.get('/login', (req, res) =>
+  res.render("login")
+)
+
+router.post('/login', function(req, res) {
+  let email = req.body.email
+  let password = req.body.password
+  cUser.findEmailLogin(email)
+  .then(user => {
+    if(bcrypt.compareSync(password, user.password)) {
+     // Passwords match
+     req.session.user = user;
+     res.redirect('/user/home');
+    } else {
+     res.send('gagal');
+    }
+  })
+})
+
+router.get('/logout', function(req, res, next) {
+  if (req.session) {
+    req.session.destroy(function(err) {
+      if(err) {
+        return next(err);
+      } else {
+        return res.redirect('/');
+      }
+    });
+  }
+});
+
+
+
+
 
 module.exports = router
