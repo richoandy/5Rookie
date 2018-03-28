@@ -9,14 +9,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Invitation.associate = function(models) {
     // associations can be defined here
-    Invitation.belongsTo(models.User, {
-      foreignKey: "inviter_id",
-      as: 'inviter'
-    })
 
     Invitation.belongsTo(models.User, {
-      foreignKey: "invitee_id",
-      as: 'invitee'
+      foreignKey: "invitee_id"
     })
 
     Invitation.belongsTo(models.Team)
