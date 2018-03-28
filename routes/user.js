@@ -1,5 +1,8 @@
 var express = require('express')
 var router = express.Router()
+
+const cUser = require('../controllers/ControllerUser.js');
+const model = require('../models');
 const cTeam = require('../controllers/ControllerTeam.js');
 
 router.get('/home', function(req, res, next){
@@ -38,6 +41,21 @@ router.post('/create_team', function(req, res){
   })
 })
 
+router.get('/teams', (req, res) =>
+  model.User.findOne({
+    where: {
+      id: 7
+    },
+    include: [
+      {
+        model: model.UserTeam,
+      }
+    ]
+  })
+  .then(user => {
+    res.render('my_team', {user});
+  })
+)
 
 
 module.exports = router

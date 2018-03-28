@@ -3,53 +3,24 @@
 <%- include("partials/_navbar") %>
 
 <div class="container">
-  <div class="alert alert-primary w-50" role="alert">
-    <div class="">
-      Notail wants to play for your team as position 1
-      <a href="#" class="btn btn-primary" role="button">Join</a>
-      <a href="#" class="btn btn-danger" role="button">Reject</a>
-    </div>
-    <hr/>
-    <div class="">
-      Dendi wants to play for your team as position 2
-      <a href="#" class="btn btn-primary" role="button">Join</a>
-      <a href="#" class="btn btn-danger" role="button">Reject</a>
-    </div>
-</div>
-
-<div class="container">
   <table class = "table">
     <thead class = "thead-dark">
       <tr>
-        <th scope="col">Position 1</th>
-        <th scope="col">Position 2</th>
-        <th scope="col">Position 3</th>
-        <th scope="col">Position 4</th>
-        <th scope="col">Position 5</th>
+        <th scope="col">ID</th>
+        <th scope="col">Team Name</th>
+        <th scope="col">Captain</th>
+        <th scope="col">Options</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Fear <button type="button" class="btn">Invite</button></td>
-        <td>Dendi <button type="button" class="btn">Invite</button></td>
-        <td>iceiceice <button type="button" class="btn">Invite</button></td>
-        <td>jeraX <button type="button" class="btn">Invite</button></td>
-        <td>Fly <button type="button" class="btn">Invite</button></td>
-      </tr>
-      <tr>
-        <td>Fear</td>
-        <td>Dendi</td>
-        <td>iceiceice</td>
-        <td>jeraX</td>
-        <td>Fly</td>
-      </tr>
-      <tr>
-        <td>Fear</td>
-        <td>Dendi</td>
-        <td>iceiceice</td>
-        <td>jeraX</td>
-        <td>Fly</td>
-      </tr>
+      <% for(let i = 0; i < user.UserTeams.length; i++) { %>
+        <tr>
+          <th> <%= user.UserTeams[i].TeamId %> </th>
+          <th> -- </th>
+          <th> -- </th>
+          <th> <a href="/user/teams/<%= user.UserTeams[i].id %>/detail">Detail</th>
+        </tr>
+      <% } %>
     </tbody>
   </table>
 </div>
