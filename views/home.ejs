@@ -7,8 +7,8 @@
     <%for(let i = 0; i<notif.length; i++){%>
     <div class="">
       <%=notif[i].Team.nama%> sent you an invite to play for their team
-      <a href="/user/invite/accept/<%=notif[i].id%>" class="btn btn-primary" role="button">Join</a>
-      <a href="/user/invite/reject/<%=notif[i].id%>" class="btn btn-danger" role="button">Reject</a>
+      <a href="/user/respond/accept/<%=notif[i].id%>" class="btn btn-primary" role="button">Join</a>
+      <a href="/user/respond/reject/<%=notif[i].id%>" class="btn btn-danger" role="button">Reject</a>
       <hr/>
     </div>
     <%}%>
