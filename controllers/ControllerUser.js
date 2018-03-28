@@ -3,6 +3,11 @@ const model = require('../models');
 class ControllerUser {
   static list() {
     return model.User.findAll({
+      include: [
+        {
+          model: model.Team
+        }
+      ],
       order: [
         ['id', 'ASC']
       ]

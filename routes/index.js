@@ -19,7 +19,7 @@ router.post('/login', function(req, res) {
     if(bcrypt.compareSync(password, user.password)) {
      // Passwords match
      req.session.user = user;
-     res.send(req.session.user);
+     res.render('/');
     } else {
      res.send('gagal');
     }
