@@ -234,16 +234,19 @@ router.get('/respon/accept/:id', function(req, res) {
     userteam.save()
     .then(() => {
       res.redirect("/user/teams")
-    });
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  })
+  .catch(err => {
+    console.log(err);
   })
 })
 
 router.get('/respon/teamAccept/:id', function(req, res) {
   model.Invitation.findById(req.params.id)
   .then((invitation) => {
-    invitation.update({
-      status: "accepted"
-    })
     model.User.findById(invitation.invitee_id)
     .then((user) => {
       let userteam = model.UserTeam.build({
@@ -253,8 +256,119 @@ router.get('/respon/teamAccept/:id', function(req, res) {
       })
       userteam.save()
       .then(() => {
+        invitation.update({
+          status: "accepted"
+        })
         res.redirect("/user/teams")
-      });
+      })
+      .catch(err => {
+        invitation.update({
+          status: "reject"
+        })
+        model.Invitation.findAll({
+            where:
+            {
+              TeamId: req.params.id,
+              status: "pending",
+              action: "request",
+            },
+            include: [
+              {
+                model: model.User
+              }
+            ]
+          })
+        .then(function(notif){
+          model.UserTeam.findAll({
+            where: {TeamId: req.params.id},
+            include: [{model: model.User}],
+            order:[['position', 'ASC']]
+          })
+          .then(function(teamData){
+            model.User.findAll()
+            .then(function(user){
+              let pos1 = []
+              let pos2 = []
+              let pos3 = []
+              let pos4 = []
+              let pos5 = []
+
+              for (var i = 0; i < user.length; i++) {
+                if (user[i].position === "Position 1") {
+                  pos1.push(user[i])
+                }
+                if (user[i].position === "Position 2") {
+                  pos2.push(user[i])
+                }
+                if (user[i].position === "Position 3") {
+                  pos3.push(user[i])
+                }
+                if (user[i].position === "Position 4") {
+                  pos4.push(user[i])
+                }
+                if (user[i].position === "Position 5") {
+                  pos5.push(user[i])
+                }
+              }
+              res.render('my_team_detail', {teamMembers:teamData, nickname: req.session.user.nickname, pos1:pos1, pos2:pos2, pos3:pos3, pos4:pos4, pos5:pos5, teamId: req.params.id, notif, err: err.message})
+            })
+          })
+        })
+      })
+    })
+    .catch(err => {
+      invitation.update({
+        status: "reject"
+      })
+      model.Invitation.findAll({
+          where:
+          {
+            TeamId: req.params.id,
+            status: "pending",
+            action: "request",
+          },
+          include: [
+            {
+              model: model.User
+            }
+          ]
+        })
+      .then(function(notif){
+        model.UserTeam.findAll({
+          where: {TeamId: req.params.id},
+          include: [{model: model.User}],
+          order:[['position', 'ASC']]
+        })
+        .then(function(teamData){
+          model.User.findAll()
+          .then(function(user){
+            let pos1 = []
+            let pos2 = []
+            let pos3 = []
+            let pos4 = []
+            let pos5 = []
+
+            for (var i = 0; i < user.length; i++) {
+              if (user[i].position === "Position 1") {
+                pos1.push(user[i])
+              }
+              if (user[i].position === "Position 2") {
+                pos2.push(user[i])
+              }
+              if (user[i].position === "Position 3") {
+                pos3.push(user[i])
+              }
+              if (user[i].position === "Position 4") {
+                pos4.push(user[i])
+              }
+              if (user[i].position === "Position 5") {
+                pos5.push(user[i])
+              }
+            }
+            res.render('my_team_detail', {teamMembers:teamData, nickname: req.session.user.nickname, pos1:pos1, pos2:pos2, pos3:pos3, pos4:pos4, pos5:pos5, teamId: req.params.id, notif, err: err.message})
+          })
+        })
+      })
     })
   })
 })
