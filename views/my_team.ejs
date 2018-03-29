@@ -21,7 +21,7 @@
         <tr>
           <th> <%= user.UserTeams[i].Team.id %> </th>
           <th> <%= user.UserTeams[i].Team.nama %> </th>
-          <th> <%= user.UserTeams[i].Team.id_ketua %> </th>
+          <th> <%= user.UserTeams[i].Team.ketua.nickname %> </th>
           <th> <a href="/user/teams/<%= user.UserTeams[i].Team.id %>/detail">Detail</a> | <a href="/user/teams/delete/<%= user.UserTeams[i].Team.id%>">delete</a></th>
         </tr>
       <% } %>

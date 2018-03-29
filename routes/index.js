@@ -74,6 +74,12 @@ router.post('/login', function(req, res) {
 })
 
 router.get('/logout', function(req, res, next) {
+  if(req.session.user) {
+    next();
+  } else {
+    res.redirect('/');
+  }
+}, function(req, res, next) {
   if (req.session) {
     req.session.destroy(function(err) {
       if(err) {
@@ -85,7 +91,13 @@ router.get('/logout', function(req, res, next) {
   }
 });
 
-router.post('/search', function(req, res) {
+router.post('/search', function(req, res, next) {
+  if(req.session.user) {
+    next();
+  } else {
+    res.redirect('/');
+  }
+}, function(req, res) {
   res.locals.formatStar = formatStar;
   let search = req.body.search;
   model.User.searchBy(search)

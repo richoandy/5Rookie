@@ -26,7 +26,7 @@
   </table>
 </div>
 
-<br/> <br/>
+<br/>
 
 <div class="container">
   <h1 class="text-black">Team</h1>
@@ -38,6 +38,7 @@
       </tr>
     </thead>
     <tbody>
+      <%= JSON.stringify(teams) %>
       <% for(let i = 0; i < teams.length; i++) { %>
         <tr>
           <th> <%= teams[i].nama %> </th>

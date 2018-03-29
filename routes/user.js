@@ -5,7 +5,7 @@ const cUser = require('../controllers/ControllerUser.js');
 const model = require('../models');
 const cTeam = require('../controllers/ControllerTeam.js');
 
-router.get('/', function(req, res, next){
+router.use('/', function(req, res, next){
   if (req.session.user) {
     next()
   }else{
@@ -118,7 +118,13 @@ router.get('/teams', (req, res) =>
         model: model.UserTeam,
         include: [
           {
-            model: model.Team
+            model: model.Team,
+            include: [
+              {
+                model: model.User,
+                as: 'ketua'
+              }
+            ]
           }
         ]
       }

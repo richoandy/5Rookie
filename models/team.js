@@ -23,16 +23,6 @@ module.exports = (sequelize, DataTypes) => {
     })
   };
 
-  // Team.avaliableTeam = function() {
-  //   return Team.findAll({
-  //     include: [
-  //       {
-  //         model: models.UserTeam
-  //       }
-  //     ]
-  //   })
-  // }
-
   Team.searchBy = function(search) {
     return Team.findAll({
       where: {
