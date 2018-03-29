@@ -7,9 +7,19 @@ const model = require('../models')
 const formatStar = require('../helpers/format_star_helper');
 
 
-router.get('/', (req, res) =>
-  res.redirect('/register')
-)
+router.get('/', function(req, res){
+  // res.setTimeout(1000,function(){
+  //   console.log("timeout");
+  //   res.redirect('/register')
+  // })
+
+  var objBg = {
+  imageLink: "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/29571244_10209847828866434_2454705691265730718_n.jpg?_nc_cat=0&oh=d0220b49b4b8afa517ec96de9e2bccc9&oe=5B3E77C5"
+  }
+  res.render('welcome', {objBg})
+
+
+})
 
 router.get('/login', (req, res) =>
   res.render("login", {err:"none"})

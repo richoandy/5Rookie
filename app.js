@@ -24,8 +24,5 @@ app.use('/user', routeUser)
 //test views
 
 
-app.get('/test', function(req, res){
-  res.render('my_team')
-})
 
 app.listen(3800, () => console.log('express running'))
