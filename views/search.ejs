@@ -37,13 +37,16 @@
       <tr>
         <th>Team Name</th>
         <th>Captain</th>
+        <th>join</th>
       </tr>
     </thead>
     <tbody>
       <% for(let i = 0; i < teams.length; i++) { %>
         <tr>
-          <th> <%= teams[i].nama %> </th>
-          <th> <%= teams[i].ketua.nickname %> </th>
+          <td> <%= teams[i].nama %> </td>
+          <td> <%= teams[i].ketua.nickname %> </td>
+          <td> <a href = "/user/request/<%=teams[i].id%>/<%=userId%>" class= "btn btn-primary" onclick = "return alert('request sent!')"> 
+            request to join </a> </td>
         </tr>
       <% } %>
     </tbody>

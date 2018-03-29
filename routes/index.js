@@ -115,7 +115,7 @@ router.post('/search', function(req, res, next) {
       ]
     })
     .then(teams => {
-      res.render('search', {users, teams, nickname: req.session.user.nickname})
+      res.render('search', {users, teams, nickname: req.session.user.nickname, userId: req.session.user.id})
     })
   })
 });
