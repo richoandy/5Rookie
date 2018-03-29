@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Welcome</title>
-  </head>
-  <body>
-    <a href="/register">
-      <div style= "position: absolute; top:15%; left:15%">
-          <img src="<%= objBg.imageLink %>">
-      </div>
-    </a>
-  </body>
-</html>
+<%- include("partials/_bs_header", {title: "welcome to 5Rookie"}) %>
+
+<a href="/register">
+  <div style= "position: absolute; top:15%; left:15%">
+      <img src="<%= objBg.imageLink %>">
+  </div>
+</a>
+
+<%- include("partials/_bs_footer") %>
