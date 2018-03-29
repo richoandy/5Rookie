@@ -101,7 +101,19 @@ router.post('/search', function(req, res, next) {
   let search = req.body.search;
   model.User.searchBy(search)
   .then(users => {
-    model.Team.searchBy(search)
+    model.Team.findAll({
+      where: {
+        nama: {
+          $iLike: `%${search}%`
+        }
+      },
+      include: [
+        {
+          model: model.User,
+          as: 'ketua'
+        }
+      ]
+    })
     .then(teams => {
       res.render('search', {users, teams, nickname: req.session.user.nickname})
     })

@@ -1,6 +1,8 @@
 'use strict';
 
 const bcrypt = require('bcrypt');
+const sequelize = require('sequelize');
+const Op = sequelize.Op;
 
 module.exports = (sequelize, DataTypes) => {
   const bcrypt = require('bcrypt');
@@ -20,12 +22,6 @@ module.exports = (sequelize, DataTypes) => {
         let hash = bcrypt.hashSync(password, 10);
         console.log("hash--------", hash);
         user.password = hash;
-        //cara compare
-        // if(bcrypt.compareSync('somePassword', hash)) {
-        //  // Passwords match
-        // } else {
-        //  // Passwords don't match
-        // }
       }
     }
   });
@@ -57,8 +53,19 @@ module.exports = (sequelize, DataTypes) => {
   User.searchBy = function(search) {
     return User.findAll({
       where: {
-        nickname: {
-          $iLike: `%${search}%`
+        [Op.or]: {
+          nickname: {
+            $iLike: `%${search}%`
+          },
+          position: {
+            $iLike: `%${search}%`
+          },
+          medal: {
+            $iLike: `%${search}%`
+          },
+          email: {
+            $iLike: `%${search}%`
+          }
         }
       }
     })

@@ -23,15 +23,39 @@ module.exports = (sequelize, DataTypes) => {
     })
   };
 
-  Team.searchBy = function(search) {
-    return Team.findAll({
-      where: {
-        nama: {
-          $iLike: `%${search}%`
-        }
-      }
-    })
-  }
+  // Team.searchBy = function(search) {
+  //   return Team.findAll({
+  //     where: {
+  //       nama: {
+  //         $iLike: `%${search}%`
+  //       }
+  //     }
+  //   })
+  // }
+
+  // Team.searchBy = function(search) {
+  //   return new Promise(function(resolve, reject) {
+  //     Team.findAll({
+  //       where: {
+  //         nama: {
+  //           $iLike: `%${search}%`
+  //         }
+  //       }
+  //     })
+  //     .then(teams => {
+  //       var promises = teams.map((team) => {
+  //         console.log("ini team---", team.id_ketua);
+  //         models.User.findById(6)
+  //         .then((user) => {
+  //           team.nama_ketua = user.nickname;
+  //         })
+  //       })
+  //       Promise.all(promises).then(() => {
+  //         resolve(teams);
+  //       })
+  //     })
+  //   })
+  // }
 
   return Team;
 };
