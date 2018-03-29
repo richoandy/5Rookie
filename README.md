@@ -9,5 +9,9 @@ Final Project for Hacktiv8 Phase1 - Pair Programming
 - Express
 - EJS
 
+## Developed By
+- Richo Andy Bong
+- Zena Vilenia
+
 ## Built With
 - Atom
