@@ -1,5 +1,6 @@
 'use strict';
 
+const bcrypt = require('bcrypt');
 
 module.exports = (sequelize, DataTypes) => {
   const bcrypt = require('bcrypt');
@@ -61,6 +62,15 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     })
+  }
+
+  User.prototype.loginCheck = function (password){
+    if(bcrypt.compareSync(password, this.password)) {
+     // Passwords match
+     return true;
+    } else {
+     return false;
+    }
   }
 
   return User;
