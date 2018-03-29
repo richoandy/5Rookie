@@ -1,5 +1,5 @@
-var express = require('express')
-var router = express.Router()
+var express = require('express');
+var router = express.Router();
 
 const cUser = require('../controllers/ControllerUser.js');
 const model = require('../models');
@@ -7,9 +7,9 @@ const cTeam = require('../controllers/ControllerTeam.js');
 
 router.use('/', function(req, res, next){
   if (req.session.user) {
-    next()
+    next();
   }else{
-    res.redirect('/')
+    res.redirect('/');
   }
 })
 
@@ -21,8 +21,12 @@ router.get('/home', function(req, res) {
       status: "pending",
       action: "invite",
     },
-    include: [{model: model.Team}],
-  }).then(function(notif){
+    include: [
+      {
+        model: model.Team
+      }
+    ]
+  }).then(function(notif) {
     let position = req.session.user.position;
     let teamsTmp = [];
     cTeam.avaliableTeam()
@@ -71,7 +75,6 @@ router.post('/profile/edit', (req, res) =>
     req.session.user = success
     res.redirect('/user/home')
   })
-
 )
 
 router.get('/create_team', (req, res) =>
@@ -89,7 +92,8 @@ router.post('/create_team', function(req, res){
      TeamId: newTeam.id,
      UserId: req.session.user.id,
      position: req.session.user.position
-   }).save()
+   })
+   .save()
    .then(() => {
      res.redirect("/user/teams")
    });
@@ -153,8 +157,14 @@ router.get('/teams/:id/detail', (req, res) =>
     console.log("notif----", notif);
     model.UserTeam.findAll({
       where: {TeamId: req.params.id},
-      include: [{model: model.User}],
-      order:[['position', 'ASC']]
+      include: [
+        {
+          model: model.User
+        }
+      ],
+      order: [
+        [model.User, 'position', 'asc']
+      ]
     })
     .then(function(teamData){
       model.User.findAll()
@@ -212,7 +222,6 @@ router.get('/invite/:TeamId/:userId', (req, res) =>
   })
 )
 
-
 router.get('/respon/reject/:id', (req, res) =>
   model.Invitation.findById(req.params.id)
   .then((invitation) => {
@@ -224,7 +233,6 @@ router.get('/respon/reject/:id', (req, res) =>
     })
   })
 )
-
 
 router.get('/respon/accept/:id', function(req, res) {
   model.Invitation.findById(req.params.id)

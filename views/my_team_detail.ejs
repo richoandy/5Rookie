@@ -1,12 +1,11 @@
 <%- include("partials/_bs_header", {title: "My Team"}) %>
-
 <%- include("partials/_navbar") %>
 
 <div class="container">
-  <h1>your team member</h1>
+  <h1>Your team member</h1>
   <ul>
     <%for(let i = 0; i<teamMembers.length; i++){%>
-    <li><%=teamMembers[i].User.nickname%> : <%=teamMembers[i].User.position%> </li>
+    <li><%=teamMembers[i].User.position%>: <%=teamMembers[i].User.nickname%> </li>
     <%}%>
   </ul>
 </div>
@@ -134,6 +133,5 @@
     </tbody>
   </table>
 </div>
-
 
 <%- include("partials/_bs_footer") %>

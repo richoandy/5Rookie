@@ -1,5 +1,4 @@
 <%- include("partials/_bs_header", {title: "homepage"}) %>
-
 <%- include("partials/_navbar", {nickname: nickname}) %>
 
 <div class="container">
@@ -27,9 +26,7 @@
     </tbody>
   </table>
 </div>
-
 <br/>
-
 <div class="container">
   <h1 class="text-black">Team</h1>
   <table class="table">
@@ -45,13 +42,12 @@
         <tr>
           <td> <%= teams[i].nama %> </td>
           <td> <%= teams[i].ketua.nickname %> </td>
-          <td> <a href = "/user/request/<%=teams[i].id%>/<%=userId%>" class= "btn btn-primary" onclick = "return alert('request sent!')"> 
+          <td> <a href = "/user/request/<%=teams[i].id%>/<%=userId%>" class= "btn btn-primary" onclick = "return alert('request sent!')">
             request to join </a> </td>
         </tr>
       <% } %>
     </tbody>
   </table>
 </div>
-
 
 <%- include("partials/_bs_footer") %>

@@ -1,6 +1,0 @@
-<% for(let i = 0; i < teams.length; i++) { %>
-  <tr>
-    <th> <%= teams[i].TeamId %> </th>
-    <th> <a href="#" class="btn btn-primary" role="button">Request to Join</a> </th>
-  </tr>
-<% } %>

@@ -3,7 +3,6 @@ let formatStar = (number) => {
   for(let i = 0; i < number; i++) {
     bintang+="*";
   }
-
   return bintang;
 }
 

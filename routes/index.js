@@ -1,5 +1,6 @@
-var express = require('express')
-var router = express.Router()
+var express = require('express');
+var router = express.Router();
+
 const bcrypt = require('bcrypt');
 const cUser = require('../controllers/ControllerUser.js');
 const model = require('../models')
@@ -8,17 +9,10 @@ const formatStar = require('../helpers/format_star_helper');
 
 
 router.get('/', function(req, res){
-  // res.setTimeout(1000,function(){
-  //   console.log("timeout");
-  //   res.redirect('/register')
-  // })
-
-  var objBg = {
-  imageLink: "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/29571244_10209847828866434_2454705691265730718_n.jpg?_nc_cat=0&oh=d0220b49b4b8afa517ec96de9e2bccc9&oe=5B3E77C5"
+  let objBg = {
+    imageLink: "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/29571244_10209847828866434_2454705691265730718_n.jpg?_nc_cat=0&oh=d0220b49b4b8afa517ec96de9e2bccc9&oe=5B3E77C5"
   }
   res.render('welcome', {objBg})
-
-
 })
 
 router.get('/login', (req, res) =>
@@ -83,12 +77,12 @@ router.post('/login', function(req, res) {
 })
 
 router.get('/logout', function(req, res, next) {
-  if(req.session.user) {
-    next();
-  } else {
-    res.redirect('/');
-  }
-}, function(req, res, next) {
+    if(req.session.user) {
+      next();
+    } else {
+      res.redirect('/');
+    }
+  }, function(req, res, next) {
   if (req.session) {
     req.session.destroy(function(err) {
       if(err) {
@@ -129,6 +123,5 @@ router.post('/search', function(req, res, next) {
     })
   })
 });
-
 
 module.exports = router
