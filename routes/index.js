@@ -20,12 +20,11 @@ router.post('/login', function(req, res) {
   let password = req.body.password
   cUser.findEmailLogin(email)
   .then(user => {
-    if(bcrypt.compareSync(password, user.password)) {
-     // Passwords match
-     req.session.user = user;
-     res.redirect('/user/home');
-    } else {
-     res.render("login", {err:"wrong email/password"})
+    if (user.loginCheck(password)) {
+      req.session.user = user;
+      res.redirect('/user/home');
+    }else{
+      res.render("login", {err:"wrong email/password"})
     }
   })
 })
