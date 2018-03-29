@@ -2,8 +2,16 @@
 
 <%- include("partials/_navbar", {nickname: nickname}) %>
 
+<%if(typeof err != "undefined"){%>
+  <div class="container">
+    <div class="alert alert-danger" role="alert">
+      <%= err %>
+    </div>
+  </div>
+<% } %>
+
 <div class="container">
-  <div class="alert alert-primary w-50" role="alert">
+  <div class="alert alert-primary" role="alert">
     <%for(let i = 0; i<notif.length; i++){%>
     <div class="">
       <%=notif[i].Team.nama%> sent you an invite to play for their team

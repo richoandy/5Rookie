@@ -242,11 +242,75 @@ router.get('/respon/accept/:id', function(req, res) {
       res.redirect("/user/teams")
     })
     .catch(err => {
-      console.log(err);
+      invitation.update({
+        status: "reject"
+      })
+      .then(function(success){
+        model.Invitation.findAll({
+          where:
+          {
+            invitee_id: req.session.user.id,
+            status: "pending",
+            action: "invite",
+          },
+          include: [{model: model.Team}],
+        }).then(function(notif){
+          let position = req.session.user.position;
+          let teamsTmp = [];
+          cTeam.avaliableTeam()
+          .then(teams => {
+            teams.forEach(team => {
+              let isFind = false;
+              team.UserTeams.forEach(userteam => {
+                if(userteam.position.includes(position)) {
+                  console.log("----");
+                  isFind = true;
+                }
+              })
+              if(!isFind) {
+                teamsTmp.push(team);
+              }
+            })
+            res.render('home.ejs', {nickname: req.session.user.nickname, teams: teamsTmp, user:req.session.user, notif:notif, err:err.message})
+          })
+        })
+      })
     })
   })
   .catch(err => {
-    console.log(err);
+    invitation.update({
+      status: "reject"
+    })
+    .then(function(success){
+      model.Invitation.findAll({
+        where:
+        {
+          invitee_id: req.session.user.id,
+          status: "pending",
+          action: "invite",
+        },
+        include: [{model: model.Team}],
+      }).then(function(notif){
+        let position = req.session.user.position;
+        let teamsTmp = [];
+        cTeam.avaliableTeam()
+        .then(teams => {
+          teams.forEach(team => {
+            let isFind = false;
+            team.UserTeams.forEach(userteam => {
+              if(userteam.position.includes(position)) {
+                console.log("----");
+                isFind = true;
+              }
+            })
+            if(!isFind) {
+              teamsTmp.push(team);
+            }
+          })
+          res.render('home.ejs', {nickname: req.session.user.nickname, teams: teamsTmp, user:req.session.user, notif:notif, err:err.message})
+        })
+      })
+    })
   })
 })
 
